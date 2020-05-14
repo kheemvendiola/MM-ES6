@@ -105,19 +105,19 @@ const ALIEN_SQUAD_WIDTH = 11 * ALIEN_X_MARGIN;
 // Utility functions & classes
 //
 // ###################################################################
-function getRandomArbitrary(min, max) {
+var getRandomArbitrary = (min, max) => {
     return Math.random() * (max - min) + min;
 }
 
-function getRandomInt(min, max) {
+var getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function clamp(num, min, max) {
+var clamp = (num, min, max) => {
   return Math.min(Math.max(num, min), max);
 }
 
-function valueInRange(value, min, max) {
+var valueInRange = (value, min, max) => {
   return (value <= max) && (value >= min);
 }
  
