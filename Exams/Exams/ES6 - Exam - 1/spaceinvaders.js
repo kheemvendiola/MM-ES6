@@ -20,7 +20,7 @@
     initializing = false;
    
     // Copy the properties over onto the new prototype
-    for (var name in prop) {
+    for (let name in prop) {
       // Check if we're overwriting an existing function
       prototype[name] = typeof prop[name] == "function" &&
         typeof _super[name] == "function" && fnTest.test(prop[name]) ?
@@ -84,7 +84,7 @@
 // Constants
 //
 // ###################################################################
-var IS_CHROME = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+let IS_CHROME = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 const CANVAS_WIDTH = 640;
 const CANVAS_HEIGHT = 640;
 const SPRITE_SHEET_SRC = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAEACAYAAAADRnAGAAACGUlEQVR42u3aSQ7CMBAEQIsn8P+/hiviAAK8zFIt5QbELiTHmfEYE3L9mZE9AAAAqAVwBQ8AAAD6THY5CgAAAKbfbPX3AQAAYBEEAADAuZrC6UUyfMEEAIBiAN8OePXnAQAAsLcmmKFPAQAAgHMbm+gbr3Sdo/LtcAAAANR6GywPAgBAM4D2JXAAABoBzBjA7AmlOx8AAEAzAOcDAADovTc4vQim6wUCABAYQG8QAADd4dPd2fRVYQAAANQG0B4HAABAawDnAwAA6AXgfAAAALpA2uMAAABwPgAAgPoAM9Ci/R4AAAD2dmqcEQIAIC/AiQGuAAYAAECcRS/a/cJXkUf2AAAAoBaA3iAAALrD+gIAAADY9baX/nwAAADNADwFAADo9YK0e5FMX/UFACA5QPSNEAAAAHKtCekmDAAAAADvBljtfgAAAGgMMGOrunvCy2uCAAAACFU6BwAAwF6AGQPa/XsAAADYB+B8AAAAtU+ItD4OAwAAAFVhAACaA0T7B44/BQAAANALwGMQAAAAADYO8If2+P31AgAAQN0SWbhFDwCAZlXgaO1xAAAA1FngnA8AACAeQPSNEAAAAM4CnC64AAAA4GzN4N9NSfgKEAAAAACszO26X8/X6BYAAAD0Anid8KcLAAAAAAAAAJBnwNEvAAAA9Jns1ygAAAAAAAAAAAAAAAAAAABAQ4COCENERERERERERBrnAa1sJuUVr3rsAAAAAElFTkSuQmCC';
@@ -279,7 +279,7 @@ var Player = SheetSprite.extend({
   },
   
   updateBullets: function(dt) {
-    for (var i = this.bullets.length - 1; i >= 0; i--) {
+    for (let i = this.bullets.length - 1; i >= 0; i--) {
       var bullet = this.bullets[i];
       if (bullet.alive) {
         bullet.update(dt);
@@ -306,7 +306,7 @@ var Player = SheetSprite.extend({
     this._super(resized);
 
     // draw bullets
-    for (var i = 0, len = this.bullets.length; i < len; i++) {
+    for (let i = 0, len = this.bullets.length; i < len; i++) {
       var bullet = this.bullets[i];
       if (bullet.alive) {
         bullet.draw(resized);
@@ -403,7 +403,7 @@ var ParticleExplosion = Class.extend({
   },
   
   draw: function() {
-    for (var i = this.particles.length - 1; i >= 0; i--) {
+    for (let i = this.particles.length - 1; i >= 0; i--) {
       var particle = this.particles[i];
       particle.moves++;
 	    particle.x += particle.xunits;
@@ -426,7 +426,7 @@ var ParticleExplosion = Class.extend({
   },
   
   createExplosion: function(x, y, color, number, width, height, spd, grav, lif) {
-  for (var i =0;i < number;i++) {
+  for (let i =0;i < number;i++) {
 			var angle = Math.floor(Math.random()*360);
 			var speed = Math.floor(Math.random()*spd/2) + spd;	
 			var life = Math.floor(Math.random()*lif)+lif/2;
@@ -510,7 +510,7 @@ function initGame() {
 
 function setupAlienFormation() {
   alienCount = 0;
-  for (var i = 0, len = 5 * 11; i < len; i++) {
+  for (let i = 0, len = 5 * 11; i < len; i++) {
     var gridX = (i % 11);
     var gridY = Math.floor(i / 11);
     var clipRects;
@@ -565,7 +565,7 @@ function updateAliens(dt) {
     alienYDown = 25;
   }
   
-  for (var i = aliens.length - 1; i >= 0; i--) {
+  for (let i = aliens.length - 1; i >= 0; i--) {
     var alien = aliens[i];
     if (!alien.alive) {
       aliens.splice(i, 1);
@@ -593,11 +593,11 @@ function updateAliens(dt) {
 }
 
 function resolveBulletEnemyCollisions() {
-  var bullets = player.bullets;
+  let bullets = player.bullets;
   
-  for (var i = 0, len = bullets.length; i < len; i++) {
+  for (let i = 0, len = bullets.length; i < len; i++) {
     var bullet = bullets[i];
-    for (var j = 0, alen = aliens.length; j < alen; j++) {
+    for (let j = 0, alen = aliens.length; j < alen; j++) {
       var alien = aliens[j];
       if (checkRectCollision(bullet.bounds, alien.bounds)) {
         alien.alive = bullet.alive = false;
@@ -609,7 +609,7 @@ function resolveBulletEnemyCollisions() {
 }
 
 function resolveBulletPlayerCollisions() {
-  for (var i = 0, len = aliens.length; i < len; i++) {
+  for (let i = 0, len = aliens.length; i < len; i++) {
     var alien = aliens[i];
     if (alien.bullet !== null && checkRectCollision(alien.bullet.bounds, player.bounds)) {
       if (player.lives === 0) {
@@ -678,7 +678,7 @@ function drawBottomHud() {
 }
 
 function drawAliens(resized) {
-  for (var i = 0; i < aliens.length; i++) {
+  for (let i = 0; i < aliens.length; i++) {
     var alien = aliens[i];
     alien.draw(resized);
   }
