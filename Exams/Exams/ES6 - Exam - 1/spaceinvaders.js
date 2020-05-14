@@ -164,14 +164,14 @@ var Rect = Class.extend({
 // Globals
 //
 // ###################################################################
-const canvas = null;
+var canvas = null;
 var ctx = null;
 var spriteSheetImg = null;
 var bulletImg = null;
 var keyStates = null;
 var prevKeyStates = null;
 var lastTime = 0;
-const player = null;
+var player = null;
 var aliens = [];
 var particleManager = null;
 var updateAlienLogic = false;
@@ -179,7 +179,7 @@ var alienDirection = -1;
 var alienYDown = 0;
 var alienCount = 0;
 var wave = 1;
-const hasGameStarted = false;
+var hasGameStarted = false;
 
 
 
