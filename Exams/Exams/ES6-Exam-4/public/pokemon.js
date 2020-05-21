@@ -1,43 +1,24 @@
-/* 1) Create a class named Monster that takes 2 param as constructor (id, name)
-2) Create a new method on Monster class named "attack", this method returns a message '[monster_name] attacked'
-3) Create a new class named Pokemon that inherits from Monster class
-4) Add new property to Pokemon class. Property name is "type" which is an array
-5) override Monster class' attack method, add an "attackname" parameter and the return message should be '[pokemon name] used [attackname]'
-6) use the said Pokemon class to create an array of Pokemons
-
-Sample: 
-const myPokemon = new Pokemon(1, 'Bulbasaur', [ 'Grass', 'Poison' ]);
-myPokemon.attack("Growl");
-
-sample output:
-"Bulbasaur used Growl"
-
- */
-
 class Monster {
     constructor(id, name) {
-        this.id = id;
-        this.name = name;
-
+        this.Id = id;
+        this.Name = name;
     }
 
     attack() {
-        console.log(this.name + ' attacked');
-
+        console.log(`${this.Name} attacked`);
     }
-
 }
 
 
 class Pokemon extends Monster {
     constructor(id, name, type) {
         super(id, name);
-        this.type = type;
+        this.Type = type;
     }
 
     attack(attackname) {
         super.attack();
-        console.log(this.name + ' used ' + attackname);
+        console.log(`${this.Name} used ${attackname}`);
     }
 }
 
@@ -48,3 +29,46 @@ myPokemon.attack("Growl");
 const myPokemon2 = new Pokemon(1, 'Squirtle', ['Grass', 'Poison']);
 myPokemon2.attack("Tackle");
 
+
+const pokemons = [
+    new Pokemon(1, 'Bulbasaur', ['Grass', 'Poison']),
+    new Pokemon(1, 'Bulbasaur', ['Poison', 'Grass']),
+    new Pokemon(2, 'Ivysaur', ['Grass']),
+    new Pokemon(2, 'Ivysaur', ['Poison']),
+    new Pokemon(4, 'Charmander', ['Fire']),
+    new Pokemon(7, 'Squirtle', ['Water']),
+];
+
+
+
+/* case 1.1  */ console.log(pluck(pokemons, 'Name'));
+/* case 1.2  */ console.log(pluck(pokemons, 'Name', true));
+/* case 2.1  */ console.log(pluck('pokemons', 'Name'));
+/* case 2.2  */ console.log(pluck(pokemons, 'name'));
+/* case 2.3  */ console.log(pluck(pokemons, 'name', false, true));
+
+
+function pluck(arrayObject, propertyToLookUp, isUniqueValuesOnly = false, isThrowIfPropertyNotFound = false) {
+    var arr = [];
+
+    if ((arrayObject != undefined) && Array.isArray(arrayObject)) {
+        if (arrayObject[0].hasOwnProperty(propertyToLookUp)) {
+            arrayObject.forEach(element => {
+                arr.push(element[propertyToLookUp]);
+            });
+        } else {
+            if (isThrowIfPropertyNotFound) {
+                return `ERROR: Objects in array do not contain the expected '${propertyToLookUp}' property.`;
+            }
+        }
+    }
+    else {
+        return 'ERROR: Invalid argument for expected array parameter.';
+    }
+
+    if (isUniqueValuesOnly) {
+        arr = arr.filter((x, i, a) => a.indexOf(x) == i);
+    }
+
+    return arr;
+}
