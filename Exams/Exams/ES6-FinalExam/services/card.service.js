@@ -47,12 +47,6 @@ let determineRank = (x) => {
     mappedRank.sort((a, b) => a - b);
     ranktype_count.sort((a, b) => b - a);
 
-    suit_count;
-    rank_count;
-    suit_type;
-    rank_type;
-    ranktype_count;
-
     
     if (suit_count == 1) {//FLUSH
 
@@ -90,10 +84,7 @@ let determineRank = (x) => {
 };
 
 
-
-
-
-
+/* 
 const RoyalFlush = ['h10', 'hJ', 'hQ', 'hK', 'hA'];
 const StraightFlush = ['h8', 'h9', 'hQ', 'hJ', 'h10'];
 const Flush = ['h2', 'h9', 'hQ', 'h5', 'h10'];
@@ -108,7 +99,7 @@ const TwoPair = ['s4', 'c4', 'c3', 'd3', 'cQ'];
 
 const FullHouse = ['d3', 'c3', 's7', 'd7', 'c7'];
 const HighCard = ['d3', 'cJ', 's8', 'h4', 's2'];
-
+ */
 
 //console.log(determineRank({ hand: HighCard }));
 
