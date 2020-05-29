@@ -1,8 +1,166 @@
-<form action="/" method="POST" name="hands">
-    <input type="text" name="hand">
-    <input type="text" name="hand">
-    <input type="text" name="hand">
-    <input type="text" name="hand">
-    <input type="text" name="hand">
-    <button type="submit">Get Hand</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Hands</title>
+
+
+
+    <script>
+        function getValue(e) {
+            let group = (e.target.id)[1];
+            let S = document.getElementById("S" + group).value;
+            let R = document.getElementById("R" + group).value;
+            let hand = S + R;
+
+            document.getElementById("R" + group).nextElementSibling.value = hand;
+
+        }
+
+    </script>
+
+</head>
+<body>
+    
+
+    <form action="/" method="POST" name="hands">
+
+        <select id="S1" onchange="getValue(event)" required>
+            <option value="" selected disabled hidden>Select Suit</option>
+            <option value="H">♥</option>
+            <option value="C">♣</option>
+            <option value="S">♠</option>
+            <option value="D">♦</option>
+        </select>
+        <select id="R1" onchange="getValue(event)" required>
+            <option value="" selected disabled hidden>Select Rank</option>
+            <option value="A">A</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="J">J</option>
+            <option value="Q">Q</option>
+            <option value="K">K</option>
+        </select>
+        <input type="text" name="hand" readonly>
+        <br>
+    
+        <select id="S2" onchange="getValue(event)" required>
+            <option value="" selected disabled hidden>Select Suit</option>
+            <option value="H">♥</option>
+            <option value="C">♣</option>
+            <option value="S">♠</option>
+            <option value="D">♦</option>
+        </select>
+        <select id="R2" onchange="getValue(event)" required>
+            <option value="" selected disabled hidden>Select Rank</option>
+            <option value="A">A</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="J">J</option>
+            <option value="Q">Q</option>
+            <option value="K">K</option>
+        </select>
+        <input type="text" name="hand" readonly>
+        <br>
+    
+        <select id="S3" onchange="getValue(event)" required>
+            <option value="" selected disabled hidden>Select Suit</option>
+            <option value="H">♥</option>
+            <option value="C">♣</option>
+            <option value="S">♠</option>
+            <option value="D">♦</option>
+        </select>
+        <select id="R3" onchange="getValue(event)" required>
+            <option value="" selected disabled hidden>Select Rank</option>
+            <option value="A">A</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="J">J</option>
+            <option value="Q">Q</option>
+            <option value="K">K</option>
+        </select>
+        <input type="text" name="hand" readonly>
+        <br>
+    
+        <select id="S4" onchange="getValue(event)" required>
+            <option value="" selected disabled hidden>Select Suit</option>
+            <option value="H">♥</option>
+            <option value="C">♣</option>
+            <option value="S">♠</option>
+            <option value="D">♦</option>
+        </select>
+        <select id="R4" onchange="getValue(event)" required>
+            <option value="" selected disabled hidden>Select Rank</option>
+            <option value="A">A</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="J">J</option>
+            <option value="Q">Q</option>
+            <option value="K">K</option>
+        </select>
+        <input type="text" name="hand" readonly>
+        <br>
+    
+        <select id="S5" onchange="getValue(event)" required>
+            <option value="" selected disabled hidden>Select Suit</option>
+            <option value="H">♥</option>
+            <option value="C">♣</option>
+            <option value="S">♠</option>
+            <option value="D">♦</option>
+        </select>
+        <select id="R5" onchange="getValue(event)" required>
+            <option value="" selected disabled hidden>Select Rank</option>
+            <option value="A">A</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="J">J</option>
+            <option value="Q">Q</option>
+            <option value="K">K</option>
+        </select>
+        <input type="text" name="hand" readonly>
+        <br>
+        <br>
+        <button type="submit">Get Hand</button>
+    
+      
+    </form>
+
+
+</body>
+</html>

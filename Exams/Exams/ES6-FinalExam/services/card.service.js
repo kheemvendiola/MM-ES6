@@ -1,29 +1,12 @@
-determineRank = (x) => {
 
-    /* 1	Hand-ranking categories https://www.cardplayer.com/rules-of-poker/hand-rankings
-    1.1	Five of a kind // Royal -- A, K, Q, J, 10, all the same suit
-    1.2	Straight flush -- Five cards in a sequence, all in the same suit.
-    1.3	Four of a kind -- All four cards of the same rank.
-    1.4	Full house --Three of a kind with a pair.
-    1.5	Flush --Any five cards of the same suit, but not in a sequence.
-    1.6	Straight -- Five cards in a sequence, but not of the same suit.
-    1.7	Three of a kind --Three cards of the same rank.
-    1.8	Two pair --Two different pairs.
-    1.9	One pair --Two cards of the same rank.
-    1.10	High card */
-
-    console.log(x.hand);
-
-    const suits = x.hand.map((v) => v[0]);
-    const rank = x.hand.map((v) => v[1] + (v[2] != undefined ? v[2] : ''));
-    suits;
-    rank;
-
-    const allRank = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-
+let isStraight = (mappedrank) => {
     const allRankI = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    const royal = [1, 10, 11, 12, 13];
-    const mappedRank = x.hand.map((v, i) => {
+    let startIndex = allRankI.indexOf(mappedrank[0]);
+    return mappedrank.every((r, i) => r == allRankI[startIndex + i]);
+}
+
+let mapRank = (hand) => {
+    return hand.map((v, i) => {
         var rank = v[1] + (v[2] != undefined ? v[2] : '');
 
         switch (rank) {
@@ -38,62 +21,98 @@ determineRank = (x) => {
 
             case 'K':
                 return rank[i] = 13;
-
         }
 
         return parseInt(rank);
     });
+};
 
+let distinct = (item) => {
+    return item.filter((x, i, a) => a.indexOf(x) == i);
+}
 
-    mappedRank;
+let determineRank = (x) => {
+    const royal = [1, 10, 11, 12, 13];
 
-    let suit_type = suits.filter((x, i, a) => a.indexOf(x) == i);
-    let suit_count = suit_type.length;
+    const suits = x.hand.map((v) => v[0]);
+    const suit_type = distinct(suits);
+    const suit_count = suit_type.length;
+
+    const mappedRank = mapRank(x.hand);
+
+    const rank_type = distinct(mappedRank);
+    const rank_count = rank_type.length;
+    const ranktype_count = rank_type.map((t) => { return mappedRank.filter(x => x == t).length });
+
+    mappedRank.sort((a, b) => a - b);
+    ranktype_count.sort((a, b) => b - a);
+
     suit_count;
+    rank_count;
+    suit_type;
+    rank_type;
+    ranktype_count;
 
-
-    //FLUSH
-    if (suit_count == 1) {
-        var isRoyal = false;
-        var isStraight = false;
-        mappedRank.sort((a, b) => a - b);
+    
+    if (suit_count == 1) {//FLUSH
 
         //ROYAL
         if (mappedRank.includes(13)) {
-            isRoyal = mappedRank.every((r, i) => r == royal[i]);
-            if (isRoyal) return 'Royal Flush';
+            if (mappedRank.every((r, i) => r == royal[i])) return 'Royal Flush';
         }
 
-        //STRAIGHT
-        let start = allRankI.indexOf(mappedRank[0]);
-        isStraight = mappedRank.every((r, i) => r == allRankI[start + i]);
-        if (isStraight) return 'Straight Flush';
-
-
+        //ROYAL STRAIGHT
+        if (isStraight(mappedRank)) return 'Straight Flush';
         return 'Flush';
-    }
-    else if (suit_count == 4) { //Four of a kind or Three of a kind
-        let ranks = rank.filter((x, i, a) => a.indexOf(x) == i);
-        if (ranks.length == 2) {
-            return 'Four of a kind';
-        }
-        if (ranks.length == 3) {
-            return 'Three of a kind';
-        }
 
     }
-    else if (suit_count == 3) { //Three of a kind
+    else if (ranktype_count.includes(4)) { //FOUR OF A KIND
+        return 'Four of a kind';
+
+    }
+    else if (ranktype_count.includes(3)) { //FULLHOUSE OR THREE OF A KIND
+        if (ranktype_count.includes(2)) return 'Fullhouse'
+        return 'Three of a kind';
+
+    }
+    else if (ranktype_count.includes(2)) { //TWO OR ONE PAIR
+        let pair = ranktype_count.filter(x => x == 2).length
+        if (pair == 2) return 'Two Pair';
+        return 'One Pair';
+    }
+    else {
+        if (isStraight(mappedRank)) return 'Straight';
 
     }
 
+    return 'Highcard';
 
-    return;
-
-}
+};
 
 
-console.log(determineRank({ hand: ['h8', 'c8', 's8', 'd7', 'h7'] }));
+
+
+
+
+const RoyalFlush = ['h10', 'hJ', 'hQ', 'hK', 'hA'];
+const StraightFlush = ['h8', 'h9', 'hQ', 'hJ', 'h10'];
+const Flush = ['h2', 'h9', 'hQ', 'h5', 'h10'];
+
+const ThreeOfaKind = ['d3', 'cK', 's7', 'd7', 'c7'];
+const FourOfaKind = ['d3', 'h7', 's7', 'd7', 'c7'];
+
+const Straight = ['s8', 'c9', 'cQ', 'dJ', 'h10'];
+
+const OnePair = ['hA', 'dA', 'c8', 's4', 'h7'];
+const TwoPair = ['s4', 'c4', 'c3', 'd3', 'cQ'];
+
+const FullHouse = ['d3', 'c3', 's7', 'd7', 'c7'];
+const HighCard = ['d3', 'cJ', 's8', 'h4', 's2'];
+
+
+//console.log(determineRank({ hand: HighCard }));
 
 module.exports = {
     determineRank: determineRank
 };
+
