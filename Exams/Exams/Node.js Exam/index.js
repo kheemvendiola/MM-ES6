@@ -38,27 +38,33 @@ let main = () => {
 
         fs.access(path, fs.constants.F_OK, (err) => {
             if (err) {
-                console.log(chalk.red(`${path} does not exist`));
+                console.log(chalk.red(`${path} does not exist!`));
+                readlineInterface.removeAllListeners();
                 readlineInterface.close();
             }
+            else {
+                filePath = path;
 
-            filePath = path;
+                readlineInterface.question("String to Search: ", (str) => {
+                    data = fs.readFileSync(path, 'utf8');
 
-            readlineInterface.question("String to Search: ", (str) => {
-                data = fs.readFileSync(path, 'utf8');
+                    strToFind = str;
 
-                strToFind = str;
+                    readlineInterface.question("Is Case Sensitive?: Y/[N] ", (ics) => {
 
-                readlineInterface.question("Is Case Sensitive?: Y/[N] ", (ics) => {
+                        caseSensitive = ((ics != ('Y') || ics != ('y'))) ? false : true;
+                        readlineInterface.pause();
 
-                    caseSensitive = ((ics != ('Y') || ics != ('y'))) ? false : true;
-                    readlineInterface.pause();
+                    });
 
                 });
+            }
 
-            });
 
         });
+
+
+
 
     });
 
@@ -76,7 +82,7 @@ let main = () => {
 
 
             let txt = strFormat(data, strToFind, totalOccurence);
-            fs.writeFileSync(filePath, txt,'utf8');
+            fs.writeFileSync(filePath, txt, 'utf8');
         }
 
 
