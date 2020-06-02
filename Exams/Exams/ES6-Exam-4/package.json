@@ -4,7 +4,7 @@
   "description": "This exercise would focus on OOP concepts and higher order functions.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index"
   },
   "author": "",
   "license": "ISC",
