@@ -1,16 +1,6 @@
-const fd = [
-    ['t1', 1],
-    ['t2', 2],
-    ['t3', 3],
-    ['', 1],
-    ['', 2],
-    ['t1-2', 1]
-];
-
 var first, second, third = '';
 
-
-var getWinners = (formData, cb1, cb2, cb3) => {
+var getWinners = (formData, cb1) => {
 
     var sortedArr = formData.sort(function (a, b) {
         return b[1] - a[1]
@@ -68,15 +58,8 @@ var getWinners = (formData, cb1, cb2, cb3) => {
     }
 
    cb1({f: first, s: second, t: third});
-  // cb2(second);
-   //cb3(third);
-
 
 }
-
-//getWinners(fd);
-
-
 
 module.exports = {
     getWinners: getWinners 
